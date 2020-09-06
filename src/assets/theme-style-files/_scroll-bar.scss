@@ -1,0 +1,18 @@
+// SCROLL BAR (Not Applicable in IE)
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px $scrollbarThumb;
+  -webkit-box-shadow: inset 0 0 6px $scrollbarThumb;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 0px;
+  box-shadow: inset 0 0 6px $scrollbarTrack;
+  -webkit-box-shadow: inset 0 0 6px $scrollbarTrack;
+}

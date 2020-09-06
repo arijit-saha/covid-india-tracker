@@ -1,0 +1,9 @@
+// NGX-SPINNER
+.customSpinner {
+  .overlay {
+    background: $customSpinnerBg !important;
+    .la-ball-atom {
+      color: $customSpinnerColor !important;
+    }
+  }
+}

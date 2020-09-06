@@ -1,0 +1,16 @@
+@import 'src/styles-variable.scss';
+
+.header-container {
+  height: 40px;
+}
+.navbar-brand:hover {
+  color:  $textLight !important;
+}
+:host ::ng-deep {
+  .mat-toolbar-multiple-rows {
+    min-height: inherit;
+  }
+}
+.img-logo {
+  height: 25px;
+}

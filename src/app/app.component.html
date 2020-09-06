@@ -1,0 +1,15 @@
+<!-- Global Spinner -->
+<ngx-spinner type="ball-atom" size="medium" class="customSpinnerMain" [fullScreen]="true"></ngx-spinner>
+
+<!-- Header -->
+<app-header></app-header>
+
+<!-- Sidebar with content -->
+<app-sidebar>
+  <router-outlet></router-outlet>
+</app-sidebar>
+
+<!-- Connection notification -->
+<app-notify-connection class="alert-container" [ngStyle]="{'z-index': _dataShare['showAlert']?'999':'-1'}"></app-notify-connection>
+<!-- Footer -->
+<app-footer></app-footer>

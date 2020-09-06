@@ -1,0 +1,102 @@
+<div class="h-100 position-relative container p-2">
+  <!-- CARDS START -->
+  <div class="h3 py-2">India Overview:</div>
+  <div *ngIf="_totalCases" class="card-deck">
+    <mat-card class="card confirmed-header-bg">
+      <mat-card-header class="py-3 d-flex justify-content-center">
+        <mat-card-title class="py-2 font-weight-bold">
+          <span class="confirmed-color">{{_totalCases['confirmed'] | number}}</span>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-footer class="text-center py-2 confirmed-footer-bg">
+        <span class="confirmed-color">Confirmed</span>
+      </mat-card-footer>
+    </mat-card>
+    <mat-card class="card recovered-header-bg">
+      <mat-card-header class="py-3 d-flex justify-content-center">
+        <mat-card-title class="py-2 font-weight-bold">
+          <span class="recovered-color">{{_totalCases['recovered'] | number}}</span>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-footer class="text-center py-2 recovered-footer-bg">
+        <span class="recovered-color">Recovered</span>
+      </mat-card-footer>
+    </mat-card>
+    <mat-card class="card death-header-bg">
+      <mat-card-header class="py-3 d-flex justify-content-center">
+        <mat-card-title class="py-2 font-weight-bold">
+          <span class="death-color">{{_totalCases['deaths'] | number}}</span>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-footer class="text-center py-2 death-footer-bg">
+        <span class="death-color">Deaths</span>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+  <!-- CARDS END -->
+
+  <!-- STATE TABLE START -->
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="h3 pt-4" [ngClass]="{'pb-3': _currentDisplayMode == 'state'}">{{_currentDisplayMode == 'state'? 'State': 'District'}} Wise Details:</div>
+    <button *ngIf="_currentDisplayMode == 'district'" class="mt-4" mat-raised-button color="primary" (click)="onBackButtonCLick()">Go Back</button>
+  </div>
+  <div *ngIf="_currentDisplayMode == 'district'" class="h6" [ngClass]="{'pb-2': _currentDisplayMode == 'district'}">Selected State:&nbsp;<strong>{{_selectedState}}</strong></div>
+  <div *ngIf="_stateWiseData" class="pb-3" [ngClass]="_currentDisplayMode == 'state'? 'd-block': 'd-none'">
+    <table class="w-100 position-relative overflow-auto border rounded mat-shadow" aria-describedby="Table" mat-table [dataSource]="_stateWiseData">
+
+      <ng-container matColumnDef="state">
+        <th scope="" mat-header-cell *matHeaderCellDef> States </th>
+        <td mat-cell class="cursor-pointer" (click)="onStateClick(element['districtData'], element['state']);" [title]="element['state']" *matCellDef="let element"> {{element['state']}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="confirmed">
+        <th scope="" mat-header-cell *matHeaderCellDef> Confirmed </th>
+        <td mat-cell [title]="element['confirmed'] != null? element['confirmed'] : 'Not available'" *matCellDef="let element"> {{element['confirmed'] != null? element['confirmed'] : 'Not available'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="recovered">
+        <th scope="" mat-header-cell *matHeaderCellDef> Recovered </th>
+        <td mat-cell [title]="element['recovered'] != null ? element['recovered'] : 'Not available'" *matCellDef="let element"> {{element['recovered'] != null ? element['recovered'] : 'Not available'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="deaths">
+        <th scope="" mat-header-cell *matHeaderCellDef> Deaths </th>
+        <td mat-cell [title]="element['deaths'] != null ? element['deaths'] : 'Not available'" *matCellDef="let element"> {{element['deaths'] != null ? element['deaths'] : 'Not available'}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="_displayedStateColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: _displayedStateColumns;"></tr>
+    </table>
+  </div>
+  <!-- STATE TABLE END -->
+
+  <!-- DISTRICT TABLE START -->
+  <div *ngIf="_currentDisplayMode == 'district'" class="pb-3">
+    <table class="w-100 position-relative overflow-auto border rounded mat-shadow" aria-describedby="Table" mat-table [dataSource]="_stateDistrictData">
+
+      <ng-container matColumnDef="name">
+        <th scope="" mat-header-cell *matHeaderCellDef> Districts </th>
+        <td mat-cell [title]="element['name']" *matCellDef="let element"> {{element['name']}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="confirmed">
+        <th scope="" mat-header-cell *matHeaderCellDef> Confirmed </th>
+        <td mat-cell [title]="element['confirmed'] != null? element['confirmed'] : 'Not available'" *matCellDef="let element"> {{element['confirmed'] != null? element['confirmed'] : 'Not available'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="recovered">
+        <th scope="" mat-header-cell *matHeaderCellDef> Recovered </th>
+        <td mat-cell [title]="element['recovered'] != null ? element['recovered'] : 'Not available'" *matCellDef="let element"> {{element['recovered'] != null ? element['recovered'] : 'Not available'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="deaths">
+        <th scope="" mat-header-cell *matHeaderCellDef> Deaths </th>
+        <td mat-cell [title]="element['deaths'] != null ? element['deaths'] : 'Not available'" *matCellDef="let element"> {{element['deaths'] != null ? element['deaths'] : 'Not available'}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="_displayedDistrictColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: _displayedDistrictColumns;"></tr>
+    </table>
+  </div>
+  <!-- DISTRICT TABLE END -->
+</div>

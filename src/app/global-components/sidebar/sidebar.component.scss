@@ -1,0 +1,17 @@
+@import 'src/styles-variable.scss';
+
+.main-container {
+  height: calc(100% - 60px); // 100% - (Header height + Footer height)
+  width: 100%;
+  position: relative;
+  overflow-y: auto;
+}
+.content-projector-size:not(.sidebar-expanded) {
+  padding: 4px 4px 4px 47px;
+}
+.sidebar-disabled.content-projector-size {
+  padding: 4px;
+}
+.content-projector-size {
+  padding: 4px 4px 4px 204px;
+}

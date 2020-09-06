@@ -1,0 +1,12 @@
+<main class="main-container">
+  <div class="d-flex h-100 w-100 position-relative">
+    <!-- Sidebar -->
+    <aside #sidebarRef *ngIf="_dataShare['sidebarActive']">
+      <!-- If a global sidebar in the application is needed, the code goes here -->
+    </aside>
+    <!-- Router Outlet Content goes here -->
+    <div class="flex-fill h-100 position-relative content-projector-size" [ngClass]="{'sidebar-disabled': !_dataShare['sidebarActive'], 'sidebar-expanded': _isSidebarExpanded}">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</main>

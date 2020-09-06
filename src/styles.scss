@@ -1,0 +1,18 @@
+// Declare all CSS variable in styles-variables.scss file and import
+@import './styles-variable.scss';
+// If you want to use any custom font, import here
+@import "assets/fonts/scss/fonts";
+// Theme styles imported here
+@import "assets/theme-style-files/theme.scss";
+// If you want to manupulate bootstrap's default 12 column layout or any other configuration,
+// import bootstrap.min.css in this file override the desired property
+
+.small-font {
+  font-size: $smallFontSize;
+}
+.theme-bg-color {
+  background: #1d2c73 !important;
+}
+.theme-color {
+  color: #1d2c73 !important;
+}

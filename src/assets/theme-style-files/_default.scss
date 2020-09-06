@@ -1,0 +1,78 @@
+// Default styles
+* {
+  speak: none;
+  outline: none;
+  font-family: Calibri;
+  font-kerning: normal;
+  font-variant: normal;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+html body {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  padding: 0 !important;
+  margin:  0 !important;
+  scroll-behavior: smooth;
+  overflow: hidden !important;
+  color: $defaultColor !important;
+  background: $defaultBackground !important;
+  line-height: 1.2 !important;
+  font-size: $defaultFontSize !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+  font-display: swap !important;
+}
+
+a {
+  cursor: pointer;
+
+  &:not([href]) {
+    &:focus, &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-default {
+  cursor: default;
+}
+
+.cursor-disabled {
+  pointer-events: none;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+.opacity-0 {
+  opacity: 1;
+}
