@@ -1,6 +1,6 @@
 import { DataShareService } from 'src/app/services/data-share.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RouteConfigLoadStart, Router, RouterEvent } from '@angular/router';
+import { RouteConfigLoadStart, Router, RouterEvent, Scroll } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subject } from 'rxjs';
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private _router: Router,
     private _swUpdate: SwUpdate,
     private _spinner: NgxSpinnerService,
-    public _dataShare: DataShareService
+    public _dataShare: DataShareService,
   ) { }
 
   ngOnInit(): void {

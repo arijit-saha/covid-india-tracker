@@ -1,0 +1,25 @@
+// STYLES FOR TABLE START
+table {
+  table-layout: fixed;
+}
+th, td {
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center !important;
+  vertical-align: middle;
+  border-left: 1px solid #e0e0e0;
+  border-right: 1px solid #e0e0e0;
+}
+:host ::ng-deep {
+  .mat-header-cell {
+    font-size: 16px;
+    font-weight: bold;
+    color: #000000;
+  }
+  .mat-row:hover{
+    background: #edf2f6;
+  }
+}
+// STYLES FOR TABLE END

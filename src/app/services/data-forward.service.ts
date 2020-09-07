@@ -8,8 +8,7 @@ export class DataForwardService {
    * This service can be used to forward late subscribed data.
    */
 
-  _data: any;
-  _forwardDataTo = new BehaviorSubject(false);
+  _forwardDataTo = new BehaviorSubject({});
   fetchForwardedData$ = this._forwardDataTo.asObservable();
 
   constructor() { }

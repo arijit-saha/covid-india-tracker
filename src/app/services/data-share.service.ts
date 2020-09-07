@@ -12,6 +12,7 @@ export class DataShareService implements OnDestroy  {
 
   showAlert = false;
   sidebarActive = false;
+  shareDistrictData: any;
   private _destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor() { }

@@ -5,13 +5,15 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorHandlerService } from 'src/app/services/http-error-handler.service';
 import { HttpClientRequestService } from 'src/app/services/http-client-request.service';
 import { ApiConfigService } from 'src/app/services/api-config.service';
+import { Router } from '@angular/router';
+import { DataShareService } from 'src/app/services/data-share.service';
 
 @Component({
-  selector: 'app-india-list',
-  templateUrl: './india-list.component.html',
-  styleUrls: ['./india-list.component.scss']
+  selector: 'app-state-wise-list',
+  templateUrl: './state-wise-list.component.html',
+  styleUrls: ['./state-wise-list.component.scss'],
 })
-export class IndiaListComponent implements OnInit, OnDestroy {
+export class StateWiseListComponent implements OnInit, OnDestroy {
 
   _totalCases: object;
   _stateWiseData: any;
@@ -21,16 +23,18 @@ export class IndiaListComponent implements OnInit, OnDestroy {
   _currentDisplayMode = 'state';
   private _destroy$: Subject<boolean> = new Subject<boolean>();
   _displayedStateColumns = ['state', 'confirmed', 'recovered', 'deaths'];
-  _displayedDistrictColumns = ['name', 'confirmed', 'recovered', 'deaths'];
 
   constructor(
+    private _router: Router,
     private _spinner: NgxSpinnerService,
     private _apiConfig: ApiConfigService,
     private _httpClient: HttpClientRequestService,
-    private _httpError: HttpErrorHandlerService
-  ) {  }
+    private _httpError: HttpErrorHandlerService,
+    private _dataShare: DataShareService
+  ) { }
 
   ngOnInit(): void {
+    this._spinner.show();
     this.fetchTotalCases();
   }
   // Fetch Total Cases Data
@@ -40,13 +44,13 @@ export class IndiaListComponent implements OnInit, OnDestroy {
         this._totalCases = response;
         this.fetchStateWiseCases();
       } else {
-        this._httpError.errorHandler({status: 400, message: 'No data found!'});
+        this._httpError.errorHandler({ status: 400, message: 'No data found!' });
       }
     }, (error: any) => {
-        this._spinner.hide();
-        console.log('Error in fetchTotalCases!!');
-        this._httpError.errorHandler(error);
-    }, () => {});
+      this._spinner.hide();
+      console.log('Error in fetchTotalCases!!');
+      this._httpError.errorHandler(error);
+    }, () => { });
   }
   // Fetch State Wise Cases Data
   private fetchStateWiseCases(): void {
@@ -54,12 +58,12 @@ export class IndiaListComponent implements OnInit, OnDestroy {
       if (response.length) {
         this._stateWiseData = response;
       } else {
-        this._httpError.errorHandler({status: 400, message: 'No data found!!!!'});
+        this._httpError.errorHandler({ status: 400, message: 'No data found!!!!' });
       }
     }, (error: any) => {
-        this._spinner.hide();
-        console.log('Error in fetchStateWiseCases!!');
-        this._httpError.errorHandler(error);
+      this._spinner.hide();
+      console.log('Error in fetchStateWiseCases!!');
+      this._httpError.errorHandler(error);
     }, () => {
       this._spinner.hide();
     });
@@ -67,21 +71,13 @@ export class IndiaListComponent implements OnInit, OnDestroy {
   // On State click
   onStateClick(districtData: Array<any>, selectedState: string): void {
     this._spinner.show();
-    setTimeout(() => {
-      this._stateDistrictData = districtData;
-      this._selectedState = selectedState;
-      this._currentDisplayMode = 'district';
-      window.scroll(0, 0);
-      this._spinner.hide();
-    }, 500);
-  }
-  onBackButtonCLick(): void {
-    this._currentDisplayMode = 'state';
-    this._stateDistrictData = undefined;
+    this._dataShare['shareDistrictData'] = districtData;
+    this._router.navigate(['covid-list/district-list/' + selectedState]);
   }
   // Unsubscribe from the subject itself
   ngOnDestroy(): void {
     this._destroy$.next();
     this._destroy$.complete();
   }
+
 }
