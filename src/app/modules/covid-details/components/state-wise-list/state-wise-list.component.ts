@@ -41,7 +41,31 @@ export class StateWiseListComponent implements OnInit, OnDestroy {
   private fetchTotalCases(): void {
     this._httpClient.getRequest(this._apiConfig['API']['totalCases']).pipe(takeUntil(this._destroy$)).subscribe((response: any) => {
       if (response['state']) {
-        this._totalCases = response;
+        // this._totalCases = response;
+        this._totalCases = {
+          confirmed: {
+            cases: response['confirmed'],
+            text: 'Confirmed',
+            headerBg: '#fef5f4',
+            footerBg: '#fbd6d7',
+            color: '#d45e62',
+          },
+          recovered: {
+            cases: response['recovered'],
+            text: 'Recovered',
+            headerBg: '#f1fdf4',
+            footerBg: '#c8f5d6',
+            color: '#459d69',
+          },
+          deaths: {
+            cases: response['deaths'],
+            text: 'Deaths',
+            headerBg: '#edf2f6',
+            footerBg: '#e0e7ef',
+            color: '#85919f',
+          },
+          keys: ['confirmed', 'recovered', 'deaths']
+        };
         this.fetchStateWiseCases();
       } else {
         this._httpError.errorHandler({ status: 400, message: 'No data found!' });

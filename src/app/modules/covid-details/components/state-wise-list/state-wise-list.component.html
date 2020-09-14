@@ -2,36 +2,18 @@
   <!-- CARDS START -->
   <div class="h3 py-2">India Overview:</div>
   <div *ngIf="_totalCases" class="card-deck">
-    <mat-card class="card confirmed-header-bg">
-      <mat-card-header class="py-3 d-flex justify-content-center">
-        <mat-card-title class="py-2 font-weight-bold">
-          <span class="confirmed-color">{{_totalCases['confirmed'] | number}}</span>
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-footer class="text-center py-2 confirmed-footer-bg">
-        <span class="confirmed-color">Confirmed</span>
-      </mat-card-footer>
-    </mat-card>
-    <mat-card class="card recovered-header-bg">
-      <mat-card-header class="py-3 d-flex justify-content-center">
-        <mat-card-title class="py-2 font-weight-bold">
-          <span class="recovered-color">{{_totalCases['recovered'] | number}}</span>
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-footer class="text-center py-2 recovered-footer-bg">
-        <span class="recovered-color">Recovered</span>
-      </mat-card-footer>
-    </mat-card>
-    <mat-card class="card death-header-bg">
-      <mat-card-header class="py-3 d-flex justify-content-center">
-        <mat-card-title class="py-2 font-weight-bold">
-          <span class="death-color">{{_totalCases['deaths'] | number}}</span>
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-footer class="text-center py-2 death-footer-bg">
-        <span class="death-color">Deaths</span>
-      </mat-card-footer>
-    </mat-card>
+    <ng-container *ngFor="let item of _totalCases['keys']">
+      <mat-card class="card" [ngStyle]="{'background': _totalCases[item]['headerBg']}">
+        <mat-card-header class="py-3 d-flex justify-content-center">
+          <mat-card-title class="py-2 font-weight-bold">
+            <span [ngStyle]="{'color': _totalCases[item]['color']}">{{_totalCases[item]['cases'] | number}}</span>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-footer class="text-center py-2" [ngStyle]="{'background': _totalCases[item]['footerBg']}">
+          <span [ngStyle]="{'color': _totalCases[item]['color']}">{{_totalCases[item]['text']}}</span>
+        </mat-card-footer>
+      </mat-card>
+    </ng-container>
   </div>
   <!-- CARDS END -->
 
